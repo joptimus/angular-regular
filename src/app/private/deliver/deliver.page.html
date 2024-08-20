@@ -1,12 +1,17 @@
-<ion-header collapse="condense">
+<ion-header >
   <ion-toolbar>
-    <ion-title size="large">Please Scan ID</ion-title>
+    <ion-title>Please Scan ID</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]="true">
+<ion-content>
 
   <ion-card>
     <ion-card-header>Scan DL or Enter Information</ion-card-header>
+
+    <ion-button (click)="openScanner()">
+      <ion-icon name="barcode-sharp"></ion-icon>
+    </ion-button>
+
 
     <ion-list>
       <ion-item>
