@@ -209,6 +209,7 @@ export class FolderPage implements OnInit {
   }
 
   async fetchData(data?) {
+    this.pdfData = '';
     const awb = data || this.scanData;
     await this.presentLoading('Searching');
 
