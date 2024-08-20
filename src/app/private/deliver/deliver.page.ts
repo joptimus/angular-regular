@@ -5,6 +5,8 @@ import { AlertController } from '@ionic/angular';
 import SignaturePad from 'signature_pad';
 import { DataService } from 'src/app/services/local/data.service';
 import { ScreenOrientation } from '@capacitor/screen-orientation';
+import { CapacitorBarcodeScanner } from '@capacitor/barcode-scanner';
+import { Parse } from 'aamva-parser';
 
 @Component({
   selector: 'app-deliver',
@@ -54,6 +56,25 @@ export class DeliverPage implements OnInit {
     //   });
      
     // });
+  }
+
+  async openScanner() {
+    if(Capacitor.isNativePlatform()) {
+      const data = await CapacitorBarcodeScanner.scanBarcode({
+        hint: 11 || 6,
+        cameraDirection: 1,
+      });
+      console.log(data);
+              this.driversLicense = {};
+        this.rawData = data.ScanResult;
+  
+        this.driversLicense = Parse(data.ScanResult);
+        this.engage(this.driversLicense);
+        console.log(this.driversLicense);
+    } else {
+      console.warn('not Native Platform', Capacitor.getPlatform());
+    }
+
   }
 
   ngAfterViewInit() {

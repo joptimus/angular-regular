@@ -144,6 +144,10 @@ export class FolderPage implements OnInit {
         const awb = this.utility.getAwbFromString(data);
         this.fetchData(awb);
         break;
+      case ScanDataType.DATAMATRIX:
+        const getAwb = this.utility.getAwbFromString(data);
+        this.fetchData(getAwb);
+        break;
       default:
         console.log('no pattern matched');
         this.fetchData(data);
@@ -212,6 +216,7 @@ export class FolderPage implements OnInit {
   }
 
   async fetchData(data?) {
+    this.pdfData = '';
     const awb = data || this.scanData;
     await this.presentLoading('Searching');
 

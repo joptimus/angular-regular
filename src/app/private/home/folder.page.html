@@ -18,8 +18,9 @@
         </ion-card-header>
         <ion-card-content>
           <ion-item class="scan-awb" lines="none">
-            <ion-input autofocus="true" inputmode="numeric" [(ngModel)]="pdfData" (keyup.enter)="testDL()"></ion-input>
+            <ion-input autofocus="true" [(ngModel)]="pdfData" (keyup.enter)="testDL()"></ion-input>
           </ion-item>
+          <ion-button (click)="testDL()">Search</ion-button>
           <ion-button (click)="openScanner()">
             <ion-icon name="barcode-sharp"></ion-icon>
           </ion-button>
@@ -38,7 +39,8 @@
         </ion-card-header>
         <ion-card-content>
           <ion-item class="scan-awb" lines="none">
-            <ion-input autofocus="true" inputmode="numeric" [(ngModel)]="pdfData" (keyup.enter)="testDL()"></ion-input>
+            <ion-input autofocus="true" [(ngModel)]="pdfData" (keyup.enter)="testDL()"></ion-input>
+            <ion-button (click)="testDL()">Search</ion-button>
           </ion-item>
         </ion-card-content>
       </ion-card>
