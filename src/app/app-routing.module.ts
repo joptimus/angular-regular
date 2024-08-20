@@ -4,12 +4,20 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Inbox',
+    redirectTo: 'folder/status',
     pathMatch: 'full'
   },
   {
     path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+    loadChildren: () => import('./private/home/folder.module').then( m => m.FolderPageModule)
+  },
+  {
+    path: 'deliver',
+    loadChildren: () => import('./private/deliver/deliver.module').then( m => m.DeliverPageModule)
+  },
+  {
+    path: 'signature',
+    loadChildren: () => import('./private/signature/signature.module').then( m => m.SignaturePageModule)
   }
 ];
 

@@ -1,0 +1,21 @@
+<ion-content>
+ 
+  <div id="signature-pad" class="signature-pad">
+    <div class="signature-pad--body">
+      <canvas #signatureCanvas></canvas>
+    </div>
+    <div class="signature-pad--footer">
+      <div class="description">Sign above</div>
+
+      <div class="signature-pad--actions">
+        <div>
+          <ion-button (click)="clearSignature()" data-action="clear">Clear</ion-button>
+          <!-- <ion-button (click)="saveAsSVG()" data-action="save-svg">Save as SVG</ion-button> -->
+          <ion-button (click)="save()">Save</ion-button>
+       </div>
+
+      </div>
+    </div>
+  </div>
+</ion-content>
+

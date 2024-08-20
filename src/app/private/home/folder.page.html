@@ -1,0 +1,202 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>SCS Mobile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <div *ngIf="folder === 'status'">
+    <img class="logo" src="/assets/southwest cargo.jpg">
+    <div id="container">
+      <ion-card class="maxWidth">
+        <ion-card-header>
+          <ion-card-title>SEARCH AWB</ion-card-title>
+          <ion-card-subtitle>Scan or Enter AWB #</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item class="scan-awb" lines="none">
+            <ion-input autofocus="true" inputmode="numeric" [(ngModel)]="pdfData" (keyup.enter)="testDL()"></ion-input>
+          </ion-item>
+          <ion-button (click)="openScanner()">
+            <ion-icon name="barcode-sharp"></ion-icon>
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+
+  <div *ngIf="folder === 'recieve'">
+    <img class="logo" src="/assets/southwest cargo.jpg">
+    <div id="container">
+      <ion-card class="maxWidth">
+        <ion-card-header>
+          <ion-card-title>Recieve AWB</ion-card-title>
+          <ion-card-subtitle>Scan or Enter AWB #</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item class="scan-awb" lines="none">
+            <ion-input autofocus="true" inputmode="numeric" [(ngModel)]="pdfData" (keyup.enter)="testDL()"></ion-input>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+
+  <div *ngIf="folder === 'facilities'">
+    <ion-accordion-group>
+      <ion-accordion *ngFor="let i of facilitiesData" [value]="i.id">
+        <ion-item slot="header" color="light">
+          <ion-label>{{i.airportCodeIATA}} - {{i.commonAirportName}}</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <ion-card>
+            <ion-card-header>Facility Cutoff Times</ion-card-header>
+            <ion-card-content>
+              <ion-grid>
+                <ion-row>
+                  <ion-col><img src="./assets/freshfast.svg"></ion-col>
+                  <ion-col><img src="./assets/nfg.svg"></ion-col>
+                  <ion-col><img src="./assets/standard.svg"></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>{{i.facilityHandlingTime.domesticHandlingTime.ffCutOffTime}} mins</ion-col>
+                  <ion-col>{{i.facilityHandlingTime.domesticHandlingTime.nfgCutOffTime}} mins</ion-col>
+                  <ion-col>{{i.facilityHandlingTime.domesticHandlingTime.ssCutOffTime}} mins</ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-content>
+          </ion-card>
+
+          <ion-card>
+            <ion-card-header>Address</ion-card-header>
+            <ion-card-content>
+              <ion-list lines="none">
+                <ion-item>{{ i.facilityInfo.location.streetAddress1 }}</ion-item>
+                <ion-item *ngIf="i.facilityInfo.location.streetAddress2">{{ i.facilityInfo.location.streetAddress2 }}</ion-item>
+                <ion-item>{{ i.facilityInfo.location.cityName }}, {{ i.facilityInfo.location.stateName }} {{ i.facilityInfo.location.zipCode }}</ion-item>
+                <ion-item>
+                  <ion-icon aria-hidden="true" name="call" slot="start"></ion-icon>
+                  <ion-label>{{ i.facilityInfo.location.phoneNumber | phoneNumber }}</ion-label>
+                </ion-item>
+              </ion-list>
+              <div *ngIf="i.facilityInfo.facilityCapabilityInfo.facilityResources === 'COOLER'">
+                <ion-chip color="primary" outline="true">
+                  <ion-icon name="fish-outline"></ion-icon>
+                  <ion-label>{{i.facilityInfo.facilityCapabilityInfo.facilityResources}}</ion-label>
+                </ion-chip>
+              </div>
+            </ion-card-content>
+          </ion-card>
+
+          <ion-card>
+            <ion-card-header>Hours of Operation</ion-card-header>
+            <ion-card-content>
+              <ion-grid>
+                <ion-row>
+                  <ion-col>Day</ion-col>
+                  <ion-col>Open</ion-col>
+                  <ion-col>Close</ion-col>
+                </ion-row>
+                <ion-row *ngFor="let x of i.facilityInfo.operatingHours">
+                  <ion-col>{{x.dayOfWeek}}</ion-col>
+                  <ion-col>{{x.startTime}}</ion-col>
+                  <ion-col>{{x.endTime}}</ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+  </div>
+
+  <div *ngIf="folder === 'id'">
+    <ion-card>
+      <ion-card-header>Scan ID</ion-card-header>
+      <ion-input [(ngModel)]="rawData"></ion-input>
+      <ion-button expand="block" (click)="openScanner()">
+        <ion-icon name="barcode-sharp"></ion-icon>
+      </ion-button>
+    </ion-card>
+    
+    <div *ngIf="show">
+      <div class="result" *ngIf="isValidResult; else invalid">
+        VALID
+      </div>
+      <ng-template #invalid>
+        <div class="invalid-result">INVALID</div>
+      </ng-template>
+      <ion-item>
+        <ion-label>
+          <h3>First</h3>
+          <p>{{ dlData.firstName }}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <h3>Last</h3>
+          <p>{{ dlData.lastName }}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <h3>Address</h3>
+          <p>{{ dlData.streetAddress }}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <h3>City</h3>
+          <p>{{ dlData.city }}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <h3>State</h3>
+          <p>{{ dlData.state }}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <h3>Expiration</h3>
+          <p>{{ dlData.expirationDate }}</p>
+        </ion-label>
+      </ion-item>
+      <div class="transformed-data">{{ dlData | json }}</div>
+    </div>
+  </div>
+
+  <!-- <ion-button (click)="startVideoStream()">startVideoStream</ion-button> -->
+<div class="webcam-container" *ngIf="folder === 'webcam'">
+  <ion-button (click)="startVideoStream()">Start Video</ion-button>
+  <ion-button (click)="stopVideoStream()">Stop Video</ion-button>
+  <ion-button (click)="captureScreenshot()">Capture Screenshot</ion-button>
+  <ion-button (click)="clear()">Clear Screenshots</ion-button>
+  <div id="container1">
+    <h2>Video Stream</h2>
+     <video autoplay="true" #videoElement>
+ 
+     </video>
+ 
+   </div>
+   <div>
+     <h2>Screenshots</h2>
+     <canvas #canvasElement style="display: none;"></canvas>
+ 
+     <div class="row">
+       <div class="screenshot" *ngFor="let screenshot of screenshots">
+         <img [src]="screenshot">
+       </div>
+     </div>
+ 
+   </div>
+</div>
+
+
+
+
+
+</ion-content>

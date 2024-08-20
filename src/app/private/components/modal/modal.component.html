@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>AWB# {{data.awbPrefix}}-{{data.awbNumber}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-card>
+    <img alt="Southwest Service" [src]="serviceLevel" />
+    <ion-card-header>
+      <ion-card-title>{{data.shipperName}}</ion-card-title>
+      <ion-card-subtitle>Shipper</ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{data.consigneeName}}</ion-card-title>
+      <ion-card-subtitle>Consignee</ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+  <div class="route">
+    <div>{{data.origin.code}}</div>
+    <div>
+      <ion-icon name="airplane-sharp"></ion-icon>
+    </div>
+    <div>{{data.destination.code}}</div>
+  </div>
+  <ion-card>
+    <ion-list [inset]="true">
+      <ion-item>
+        <ion-label>Dest</ion-label>
+        <ion-label>{{data.destination.code}} - {{data.destination.name}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Status</ion-label>
+        <ion-label>{{ data.awbStatus | statusPipe }}</ion-label>
+      </ion-item>
+      <!-- <ion-item>
+        <ion-label>Scan Data</ion-label>
+        <ion-label>{{ scanData }}</ion-label>
+      </ion-item> -->
+      <ion-item>
+        <ion-label>AWB#</ion-label>
+        <ion-label>{{data.awbPrefix}} - {{data.awbNumber}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Service</ion-label>
+        <ion-label>{{ data.serviceLevel.description }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Lot Size</ion-label>
+        <ion-label>{{ data.lineInformations.length }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label># of Pieces</ion-label>
+        <ion-label>{{totalPieces}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Weight</ion-label>
+        <ion-label>{{data.actualWeight}} {{data.chargeableWeightUOM}}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+  <ion-button expand="block" (click)="confirm()">Close</ion-button>
+  <ion-button expand="block" (click)="deliver()">Deliver</ion-button>
+</ion-content>

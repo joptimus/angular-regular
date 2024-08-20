@@ -1,0 +1,117 @@
+ion-menu-button {
+  color: #fff;
+}
+ion-toolbar {
+  --background: #304CB2 !important;
+  --color: #fff
+}
+
+.maxWidth {
+  max-width: 600px;
+}
+
+.logo {
+  padding-left: 80px;
+  padding-right: 80px;
+  padding-top: 20px;
+  max-height: 150px;
+}
+
+.route {
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 36px;
+  font-weight: 800;
+}
+
+#container {
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 45%;
+  transform: translateY(-50%);
+  max-width: 600px;
+}
+
+#container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+  color: #8c8c8c;
+  margin: 0;
+}
+
+#container a {
+  text-decoration: none;
+}
+
+ion-input {
+border: none;
+text-transform:uppercase;
+font-size: 18px;
+  --padding-start: 10px;
+  box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  height: 30px;
+}
+ion-item {
+  font-size: 14px;
+}
+
+.transformed-data {
+  white-space: pre-wrap; /* This preserves the formatting of the JSON data */
+  background-color: #e0f7fa;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.result {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-size: 24px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-top: 20px;
+  color: #fff;
+  background: green;
+}
+
+.invalid-result {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-size: 24px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-top: 20px;
+  color: #fff;
+  background: red;
+}
+
+.scan-awb {
+  margin-bottom: 20px;
+}
+
+.container1 {
+  width: 500px;
+  height: 375px;
+  background: #666;
+}
+
+.screenshot {
+  width: 250px;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.webcam-container {
+  padding: 20px;
+}
