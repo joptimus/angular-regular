@@ -76,26 +76,61 @@ export class UtilityService {
     }
   }
 
+  // getAwbFromString(shipmentString: string) {
+  //   if (shipmentString.length !== 22) {
+  //     throw new Error('Input string must be exactly 22 characters long.');
+  //   }
+
+  //   // Extract the numeric part of the awb
+  //   const awbPart = shipmentString.substring(0, 11);
+  //   const awb = parseInt(awbPart.replace(/\D/g, ''), 10);
+
+  //   // Extract the numeric part of the pieces
+  //   const piecesPart = shipmentString.substring(11, 17);
+  //   const pieces = parseInt(piecesPart.replace(/\D/g, ''), 10);
+
+  //   // Extract the numeric part of the weight
+  //   const weightPart = shipmentString.substring(17, 22);
+  //   const weight = parseInt(weightPart.replace(/\D/g, ''), 10);
+
+  //   return awb;
+  // }
+
   getAwbFromString(shipmentString: string) {
-    if (shipmentString.length !== 22) {
-      throw new Error('Input string must be exactly 22 characters long.');
+    if (shipmentString.length !== 29) {
+        throw new Error('Input string must be exactly 29 characters long.');
     }
 
     // Extract the numeric part of the awb
     const awbPart = shipmentString.substring(0, 11);
     const awb = parseInt(awbPart.replace(/\D/g, ''), 10);
 
+    const lotPart = shipmentString.substring(12,14)
+    const lotId = parseInt(lotPart.replace(/\D/g, ''), 10);
+
     // Extract the numeric part of the pieces
-    const piecesPart = shipmentString.substring(11, 17);
-    const pieces = parseInt(piecesPart.replace(/\D/g, ''), 10);
+    const pieceId = shipmentString.substring(14, 18);
+    // const pieceId = parseInt(piecesPart.replace(/\D/g, ''), 10);
+
+    const sequenceNumberPart = shipmentString.substring(18, 19);
+    const sequenceNumber = parseInt(sequenceNumberPart.replace(/\D/g, ''), 10);
 
     // Extract the numeric part of the weight
-    const weightPart = shipmentString.substring(17, 22);
-    const weight = parseInt(weightPart.replace(/\D/g, ''), 10);
+    const pieceWeightPart = shipmentString.substring(20, 24);
+    const pieceWeight = parseInt(pieceWeightPart.replace(/\D/g, ''), 10);
+
+    const volPart = shipmentString.substring(25, 29);
+    const vol = parseInt(volPart.replace(/\D/g, ''), 10);
+    // return {
+    //     awbPrefixAndNumber: awb,
+    //     lotId: lotId,
+    //     pieceId: pieceId,
+    //     sequenceNumber: sequenceNumber,
+    //     pieceWeight: pieceWeight,
+    //     vol: vol
+    // };
 
     return awb;
   }
-
-
   
 }

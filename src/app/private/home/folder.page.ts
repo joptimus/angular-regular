@@ -57,6 +57,13 @@ export class FolderPage implements OnInit {
     this.initializeFolder();
     console.log('did ngOnit call again?');
     this.setupScanListener();
+    this.test2();
+  }
+
+  test2() {
+    const str = '5261007096600100011Z0010L0001';
+    const result = this.utility.getAwbFromString(str);
+    console.log('test result: ', result);
   }
 
   // ngAfterViewInit() {
